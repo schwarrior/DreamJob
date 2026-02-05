@@ -1,0 +1,114 @@
+.company-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.company-list-container h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.company-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.company-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.company-card h3 {
+  color: #1976d2;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.company-info {
+  margin-bottom: 1rem;
+}
+
+.company-info p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.company-info a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.company-info a:hover {
+  text-decoration: underline;
+}
+
+.description {
+  color: #555;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.jobs-count {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  color: #333;
+}
+
+.job-list {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.job-list h4 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.job-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.job-list li {
+  margin-bottom: 0.5rem;
+}
+
+.job-list a {
+  color: #1976d2;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.job-list a:hover {
+  color: #1565c0;
+  text-decoration: underline;
+}
+
+.loading,
+.error,
+.no-companies {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.error {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border-radius: 4px;
+}

@@ -1,0 +1,43 @@
+<div class="company-list-container">
+  <h2>Companies</h2>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading companies...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error && companies.length === 0" class="no-companies">
+    <p>No companies available at the moment.</p>
+  </div>
+
+  <div class="companies-grid" *ngIf="!loading && !error && companies.length > 0">
+    <div class="company-card" *ngFor="let company of companies">
+      <h3>{{ company.name }}</h3>
+      
+      <div class="company-info">
+        <p class="location">📍 {{ company.location }}</p>
+        <p *ngIf="company.website" class="website">
+          🌐 <a [href]="company.website" target="_blank">Visit Website</a>
+        </p>
+      </div>
+      
+      <p class="description">{{ company.description }}</p>
+      
+      <div class="jobs-count">
+        <strong>Open Positions:</strong> {{ company.jobs?.length || 0 }}
+      </div>
+
+      <div *ngIf="company.jobs && company.jobs.length > 0" class="job-list">
+        <h4>Available Jobs:</h4>
+        <ul>
+          <li *ngFor="let job of company.jobs">
+            <a [routerLink]="['/jobs', job.id]">{{ job.title }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

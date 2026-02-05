@@ -1,0 +1,101 @@
+<div class="job-detail-container">
+  <div *ngIf="loading" class="loading">
+    <p>Loading job details...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <a routerLink="/jobs" class="btn-secondary">Back to Jobs</a>
+  </div>
+
+  <div *ngIf="!loading && !error && job" class="job-detail">
+    <div class="job-header">
+      <div>
+        <h2>{{ job.title }}</h2>
+        <p class="company-name">{{ job.company?.name }}</p>
+      </div>
+      <span class="job-status" [class.active]="job.isActive">
+        {{ job.isActive ? 'Active' : 'Closed' }}
+      </span>
+    </div>
+
+    <div class="job-info">
+      <div class="info-item">
+        <strong>Location:</strong> {{ job.location }}
+      </div>
+      <div class="info-item" *ngIf="job.salary">
+        <strong>Salary:</strong> ${{ job.salary.toLocaleString() }}/year
+      </div>
+      <div class="info-item">
+        <strong>Posted:</strong> {{ job.postedDate | date:'longDate' }}
+      </div>
+    </div>
+
+    <div class="job-description">
+      <h3>Job Description</h3>
+      <p>{{ job.description }}</p>
+    </div>
+
+    <div class="company-info" *ngIf="job.company">
+      <h3>About {{ job.company.name }}</h3>
+      <p>{{ job.company.description }}</p>
+      <p><strong>Location:</strong> {{ job.company.location }}</p>
+      <p *ngIf="job.company.website">
+        <strong>Website:</strong> 
+        <a [href]="job.company.website" target="_blank">{{ job.company.website }}</a>
+      </p>
+    </div>
+
+    <div class="actions">
+      <button 
+        *ngIf="job.isActive && !showApplicationForm" 
+        (click)="toggleApplicationForm()" 
+        class="btn-primary">
+        Apply Now
+      </button>
+      <a routerLink="/jobs" class="btn-secondary">Back to Jobs</a>
+    </div>
+
+    <div *ngIf="showApplicationForm" class="application-form">
+      <h3>Submit Your Application</h3>
+      <form (ngSubmit)="submitApplication()">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input 
+            type="text" 
+            id="name" 
+            [(ngModel)]="application.applicantName" 
+            name="name" 
+            required
+            placeholder="Enter your full name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input 
+            type="email" 
+            id="email" 
+            [(ngModel)]="application.applicantEmail" 
+            name="email" 
+            required
+            placeholder="your.email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="coverLetter">Cover Letter</label>
+          <textarea 
+            id="coverLetter" 
+            [(ngModel)]="application.coverLetter" 
+            name="coverLetter"
+            rows="6"
+            placeholder="Tell us why you're a great fit for this position..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Submit Application</button>
+          <button type="button" (click)="toggleApplicationForm()" class="btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

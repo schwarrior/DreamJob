@@ -1,0 +1,54 @@
+<div class="application-list-container">
+  <h2>My Applications</h2>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading applications...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error && applications.length === 0" class="no-applications">
+    <p>You haven't submitted any applications yet.</p>
+    <a routerLink="/jobs" class="btn-primary">Browse Jobs</a>
+  </div>
+
+  <div class="applications-list" *ngIf="!loading && !error && applications.length > 0">
+    <div class="application-card" *ngFor="let application of applications">
+      <div class="application-header">
+        <div>
+          <h3>{{ application.job?.title }}</h3>
+          <p class="company">{{ application.job?.company?.name }}</p>
+        </div>
+        <span class="status-badge" [ngClass]="getStatusClass(application.status)">
+          {{ application.status }}
+        </span>
+      </div>
+
+      <div class="application-info">
+        <div class="info-row">
+          <strong>Applicant:</strong> {{ application.applicantName }}
+        </div>
+        <div class="info-row">
+          <strong>Email:</strong> {{ application.applicantEmail }}
+        </div>
+        <div class="info-row">
+          <strong>Applied:</strong> {{ application.appliedDate | date:'medium' }}
+        </div>
+        <div class="info-row" *ngIf="application.job?.location">
+          <strong>Location:</strong> {{ application.job.location }}
+        </div>
+      </div>
+
+      <div *ngIf="application.coverLetter" class="cover-letter">
+        <h4>Cover Letter:</h4>
+        <p>{{ application.coverLetter }}</p>
+      </div>
+
+      <div class="actions">
+        <a [routerLink]="['/jobs', application.jobId]" class="btn-secondary">View Job</a>
+      </div>
+    </div>
+  </div>
+</div>

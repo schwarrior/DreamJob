@@ -1,0 +1,48 @@
+<div class="job-list-container">
+  <h2>Available Jobs</h2>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading jobs...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!loading && !error && jobs.length === 0" class="no-jobs">
+    <p>No jobs available at the moment. Check back soon!</p>
+  </div>
+
+  <div class="jobs-grid" *ngIf="!loading && !error && jobs.length > 0">
+    <div class="job-card" *ngFor="let job of jobs">
+      <div class="job-header">
+        <h3>{{ job.title }}</h3>
+        <span class="job-status" [class.active]="job.isActive">
+          {{ job.isActive ? 'Active' : 'Closed' }}
+        </span>
+      </div>
+      
+      <div class="job-company">
+        <strong>{{ job.company?.name }}</strong>
+      </div>
+      
+      <div class="job-details">
+        <p class="location">📍 {{ job.location }}</p>
+        <p class="salary" *ngIf="job.salary">
+          💰 ${{ job.salary.toLocaleString() }}/year
+        </p>
+        <p class="posted-date">
+          📅 Posted: {{ job.postedDate | date:'mediumDate' }}
+        </p>
+      </div>
+      
+      <p class="job-description">
+        {{ job.description.substring(0, 150) }}{{ job.description.length > 150 ? '...' : '' }}
+      </p>
+      
+      <div class="job-actions">
+        <a [routerLink]="['/jobs', job.id]" class="btn-primary">View Details</a>
+      </div>
+    </div>
+  </div>
+</div>
