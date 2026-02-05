@@ -229,12 +229,13 @@ If ports 7178 or 4200 are in use, update:
 - RxJS 7.8
 - Angular Router
 
-## License
+## Claude Task Log
 
-MIT License - Feel free to use this project for learning and development.
+### Initial
 
-## Support
+Create an application DreamJob. Solution has 2 projects side-by-side. 
+	1) DreamJob.Client. An Angular project. Builds into the Server project. Is the home page. 
+	2) DreamJob.Server. An ASP.Net Project. Serves the interface. Hosts web services. Defines the project data repository with Entity Framework code fist. EF updates will create and maintain a SQL Server database.
 
-For issues or questions, please create an issue in the repository.
 
 
