@@ -13,6 +13,13 @@ public class DreamJobContext : DbContext
     public DbSet<Models.DreamJob> DreamJobs { get; set; }
     public DbSet<JobSkill> JobSkills { get; set; }
 
+	// protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	// {
+	// 	base.OnConfiguring(optionsBuilder);
+	// 	//suppress "RelationalEventId.PendingModelChangesWarning"
+	// 	optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore());
+	// }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -58,8 +65,8 @@ In this position, you will be responsible for designing, developing, and maintai
 • Professional development opportunities
 • Flexible working hours
 • Modern tech stack",
-                CreatedDate = DateTime.UtcNow,
-                LastModifiedDate = DateTime.UtcNow
+                CreatedDate = new DateTime(2026, 2, 16, 19, 6, 54, 397, DateTimeKind.Utc), //DateTime.UtcNow,
+                LastModifiedDate = new DateTime(2026, 2, 16, 19, 6, 54, 397, DateTimeKind.Utc), // DateTime.UtcNow
             }
         );
 

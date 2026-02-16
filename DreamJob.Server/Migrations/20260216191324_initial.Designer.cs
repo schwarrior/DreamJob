@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreamJob.Server.Migrations
 {
     [DbContext(typeof(DreamJobContext))]
-    [Migration("20260216183800_initial")]
+    [Migration("20260216191324_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -56,9 +56,9 @@ namespace DreamJob.Server.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2026, 2, 16, 18, 37, 59, 541, DateTimeKind.Utc).AddTicks(973),
+                            CreatedDate = new DateTime(2026, 2, 16, 19, 6, 54, 397, DateTimeKind.Utc),
                             JobDetails = "We are seeking a talented Senior Full Stack Developer to join our innovative team. \n\n**About the Role:**\nIn this position, you will be responsible for designing, developing, and maintaining both front-end and back-end components of our web applications. You'll work closely with cross-functional teams to deliver high-quality software solutions.\n\n**What You'll Do:**\n• Design and implement scalable web applications\n• Collaborate with designers and product managers\n• Write clean, maintainable code\n• Mentor junior developers\n• Participate in code reviews and technical discussions\n\n**What We Offer:**\n• Competitive salary and benefits\n• Remote-first work environment\n• Professional development opportunities\n• Flexible working hours\n• Modern tech stack",
-                            LastModifiedDate = new DateTime(2026, 2, 16, 18, 37, 59, 541, DateTimeKind.Utc).AddTicks(1185),
+                            LastModifiedDate = new DateTime(2026, 2, 16, 19, 6, 54, 397, DateTimeKind.Utc),
                             Title = "Senior Full Stack Developer"
                         });
                 });
