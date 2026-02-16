@@ -237,5 +237,14 @@ Create an application DreamJob. Solution has 2 projects side-by-side.
 	1) DreamJob.Client. An Angular project. Builds into the Server project. Is the home page. 
 	2) DreamJob.Server. An ASP.Net Project. Serves the interface. Hosts web services. Defines the project data repository with Entity Framework code fist. EF updates will create and maintain a SQL Server database.
 
+### Revision
+
+2/16/2026
+
+Create an application DreamJob. Solution has 2 projects side-by-side. 
+	1) DreamJob.Client. An Angular 19 project. Builds into the Server project. Is the home page. It looks similar to a job requirement from Dice, for example https://www.dice.com/job-detail/3995c9a5-bac6-4313-a9ff-0086ec2d2ccc. Its simplier. There is a title pane, a job skills pane and a job details pane. No panes for Job Alerts, Similar Jobs, or Job Fit.  By default, all content is for a generic technical "Dream Job". Each pane has a button that transforms the pane into an input form for the user to provide their personal dream job details for that pane. Skills are displayed as badges. The skills pane, in edit, should show 30 common technical skills for the user to select from, in addition to allowing the user to create custom skill badges. 
+	2) DreamJob.Server. An ASP.Net Project on .Net 10. Serves the interface. Hosts web services. Defines the project data repository with Entity Framework code fist. EF updates will create and maintain a SQL Server database.
+	
+
 
 
