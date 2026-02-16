@@ -4,72 +4,60 @@ echo DreamJob Application Setup
 echo ========================================
 echo.
 
-REM Check if we're in the right directory
-if not exist "DreamJob.sln" (
-    echo ERROR: Please run this script from the DreamJob root directory
-    echo Current directory: %CD%
+echo Step 1: Checking .NET SDK...
+dotnet --version
+if %errorlevel% neq 0 (
+    echo ERROR: .NET SDK not found! Please install .NET 8.0 or higher.
+    echo Download from: https://dotnet.microsoft.com/download
     pause
     exit /b 1
 )
+echo .NET SDK found!
+echo.
 
-echo Step 1: Installing Angular dependencies...
+echo Step 2: Checking Node.js...
+node --version
+if %errorlevel% neq 0 (
+    echo ERROR: Node.js not found! Please install Node.js 18 or higher.
+    echo Download from: https://nodejs.org/
+    pause
+    exit /b 1
+)
+echo Node.js found!
+echo.
+
+echo Step 3: Installing Angular dependencies...
 cd DreamJob.Client
 call npm install
 if %errorlevel% neq 0 (
-    echo ERROR: Failed to install Angular dependencies
+    echo ERROR: Failed to install npm packages!
     pause
     exit /b 1
 )
 cd ..
-
+echo Dependencies installed!
 echo.
-echo Step 2: Restoring .NET packages...
+
+echo Step 4: Setting up database...
 cd DreamJob.Server
-call dotnet restore
+dotnet ef database update
 if %errorlevel% neq 0 (
-    echo ERROR: Failed to restore .NET packages
-    pause
-    exit /b 1
+    echo WARNING: Database migration may have failed.
+    echo The database will be created automatically on first run.
 )
-
-echo.
-echo Step 3: Building the backend...
-call dotnet build
-if %errorlevel% neq 0 (
-    echo ERROR: Failed to build backend
-    pause
-    exit /b 1
-)
-
-echo.
-echo Step 4: Creating database...
-echo Note: This will create migrations and update the database
-call dotnet ef migrations add InitialCreate
-call dotnet ef database update
-if %errorlevel% neq 0 (
-    echo WARNING: Database setup had issues. The app will try to create it on first run.
-)
-
 cd ..
-
 echo.
+
 echo ========================================
 echo Setup Complete!
 echo ========================================
 echo.
 echo To run the application:
+echo   1. Open DreamJob.sln in Visual Studio 2022
+echo   2. Press F5 to run
 echo.
-echo Option 1 - Open in Visual Studio:
-echo   1. Open DreamJob.sln
-echo   2. Set DreamJob.Server as startup project
-echo   3. Press F5
-echo.
-echo Option 2 - Run from command line:
+echo OR run manually:
 echo   Terminal 1: cd DreamJob.Server ^&^& dotnet run
 echo   Terminal 2: cd DreamJob.Client ^&^& npm start
-echo.
-echo The application will be available at:
-echo   Backend API: https://localhost:7178
-echo   Frontend: http://localhost:4200
 echo.
 pause

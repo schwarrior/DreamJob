@@ -8,20 +8,26 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add DbContext
-builder.Services.AddDbContext<DreamJobDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Add DbContext with SQL Server
+builder.Services.AddDbContext<DreamJobContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        }));
 
 // Add CORS for Angular development
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularDev",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:4200")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+        builder => builder
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
 var app = builder.Build();
@@ -35,22 +41,28 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// Serve static files from wwwroot
 app.UseStaticFiles();
-
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
 
-// Fallback to index.html for Angular routing
+// Serve Angular app
 app.MapFallbackToFile("index.html");
 
-// Apply migrations automatically on startup (optional - remove in production)
+// Initialize database
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<DreamJobDbContext>();
-    dbContext.Database.Migrate();
+    var context = scope.ServiceProvider.GetRequiredService<DreamJobContext>();
+    try
+    {
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
 }
 
 app.Run();

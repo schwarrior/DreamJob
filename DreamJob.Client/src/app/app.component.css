@@ -1,59 +1,343 @@
+/* App Container */
 .app-container {
   min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header */
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.brand {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  margin: 0.5rem 0 0 0;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Main Content */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem 2rem;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+  padding: 3rem;
+}
+
+.error-message {
+  background: #ff4757;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Job Container */
+.job-container {
   display: flex;
   flex-direction: column;
-}
-
-.app-header {
-  background-color: #1976d2;
-  color: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.app-header h1 {
-  margin: 0 0 1rem 0;
-  font-size: 1.8rem;
-}
-
-.app-header nav {
-  display: flex;
   gap: 1.5rem;
 }
 
-.app-header nav a {
+/* Panes */
+.pane {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.pane:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.pane-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.app-header nav a:hover {
-  background-color: rgba(255,255,255,0.1);
-}
-
-.app-header nav a.active {
-  background-color: rgba(255,255,255,0.2);
-  font-weight: bold;
-}
-
-.app-main {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.app-footer {
-  background-color: #f5f5f5;
-  padding: 1rem 2rem;
-  text-align: center;
-  border-top: 1px solid #ddd;
-}
-
-.app-footer p {
+.pane-header h2 {
   margin: 0;
-  color: #666;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.pane-content {
+  padding: 2rem;
+}
+
+.edit-mode {
+  background: #f8f9fa;
+}
+
+/* Title Pane */
+.job-title {
+  font-size: 2rem;
+  color: #2d3436;
+  margin: 0;
+  font-weight: 600;
+}
+
+.title-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.title-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Skills Pane */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skill-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.skill-badge:hover {
+  transform: scale(1.05);
+}
+
+.skill-badge.removable {
+  cursor: pointer;
+  background: #ff6b6b;
+}
+
+.skill-badge.removable:hover {
+  background: #ff5252;
+}
+
+/* Skills Edit Mode */
+.skills-edit-section,
+.custom-skill-section,
+.selected-skills-section {
+  margin-bottom: 1.5rem;
+}
+
+.skills-edit-section h4,
+.custom-skill-section h4,
+.selected-skills-section h4 {
+  margin: 0 0 1rem 0;
+  color: #2d3436;
+  font-size: 1.1rem;
+}
+
+.common-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.skill-checkbox {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.skill-checkbox:hover {
+  border-color: #667eea;
+  background: #f0f3ff;
+}
+
+.skill-checkbox.selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+}
+
+.skill-checkbox input[type="checkbox"] {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.custom-skill-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.custom-skill-input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.custom-skill-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.selected-skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Details Pane */
+.job-details {
+  color: #2d3436;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.details-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.3s;
+}
+
+.details-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Buttons */
+.edit-button,
+.save-button,
+.cancel-button,
+.add-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.edit-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.edit-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.save-button {
+  background: #00b894;
+  color: white;
+}
+
+.save-button:hover {
+  background: #00a383;
+}
+
+.cancel-button {
+  background: #dfe6e9;
+  color: #2d3436;
+}
+
+.cancel-button:hover {
+  background: #b2bec3;
+}
+
+.add-button {
+  background: #667eea;
+  color: white;
+}
+
+.add-button:hover {
+  background: #5568d3;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0 1rem;
+  }
+
+  .brand {
+    font-size: 2rem;
+  }
+
+  .main-content {
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .pane-header {
+    padding: 1rem 1.5rem;
+  }
+
+  .pane-content {
+    padding: 1.5rem;
+  }
+
+  .common-skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job-title {
+    font-size: 1.5rem;
+  }
 }

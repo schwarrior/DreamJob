@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.784122">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+    <!-- Command to run on project build -->
+    <BuildCommand>npm run build</BuildCommand>
+    <!-- Command to run on project clean -->
+    <CleanCommand>
+    </CleanCommand>
+    <!-- Folder where production build objects will be placed -->
+    <ProductionBuildFolder>dist\dream-job.client</ProductionBuildFolder>
+    <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist\dream-job.client\browser\</PublishAssetsDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\components\" />
+    <Folder Include="src\app\models\" />
+    <Folder Include="src\app\services\" />
+  </ItemGroup>
+</Project>
