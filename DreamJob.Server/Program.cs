@@ -50,6 +50,7 @@ app.MapControllers();
 
 // Serve Angular app
 app.MapFallbackToFile("index.html");
+//app.MapFallbackToFile("browser/index.html");
 
 // Initialize database
 using (var scope = app.Services.CreateScope())
