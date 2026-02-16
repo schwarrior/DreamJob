@@ -237,7 +237,7 @@ Create an application DreamJob. Solution has 2 projects side-by-side.
 	1) DreamJob.Client. An Angular project. Builds into the Server project. Is the home page. 
 	2) DreamJob.Server. An ASP.Net Project. Serves the interface. Hosts web services. Defines the project data repository with Entity Framework code fist. EF updates will create and maintain a SQL Server database.
 
-### Revision
+### Revision 2
 
 2/16/2026
 
